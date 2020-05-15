@@ -26,6 +26,7 @@ public class ResultFragment extends Fragment {
     public QMUIAlphaTextView bohelun;
     public QMUIAlphaTextView zuoye;
     private String messageContent;
+    private String mchexing;
 
     @Nullable
     @Override
@@ -41,6 +42,7 @@ public class ResultFragment extends Fragment {
         baoming = (QMUIAlphaTextView) getView().findViewById(R.id.baoming);
         bohelun = (QMUIAlphaTextView) getView().findViewById(R.id.bohelun);
         zuoye = (QMUIAlphaTextView) getView().findViewById(R.id.zuoye);
+        message_total.setText("车型:"+mchexing);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -48,28 +50,27 @@ public class ResultFragment extends Fragment {
 // TODO
         // message_total.setText((ResultActivity)getActivity().getchexing());
         messageContent = event.getJSON();
+      //  mchexing=event.getChexing();
         Gson gson = new Gson();
         databean databean1 = gson.fromJson(messageContent, databean.class);
         if (databean1 != null) {
-            if ((databean1.getBaoming()) == 1001) {
+            if ((databean1.getBaoming()).equals(mchexing)) {
 //  ALog.e(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 // tv_message_total.setText("目前接收条数："+message_total);
                 baoming.setText("包名：" + databean1.getBaoming());
                 //  tv_bohelun.setText("拨禾轮："+databean1.getBohelun());
                 //  tv_zuoye.setText("作业："+databean1.getZuoye());
 
-            } else {
-                baoming.setText("chexing+" + event.getChexing());
             }
         }
-        message_total.setText(event.getChexing());
-    }
 
+    }
     ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -92,5 +93,10 @@ public class ResultFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+    public  void setMchexing(String s)
+    {
+       this.mchexing=s;
+
     }
 }

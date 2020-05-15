@@ -1,7 +1,6 @@
 package com.mut.iotdemotest;
 
 public class databean  {
-
     /**
      * chesu : 0
      * shusongzhou : 0
@@ -11,12 +10,11 @@ public class databean  {
      * bohelun : 77
      * zuoye : 0
      */
-
     private String chesu;
     private String shusongzhou;
     private String getai;
     private String fukuan;
-    private int baoming;
+    private String baoming;
     private String bohelun;
     private String zuoye;
 
@@ -52,11 +50,11 @@ public class databean  {
         this.fukuan = fukuan;
     }
 
-    public int getBaoming() {
+    public String getBaoming() {
         return baoming;
     }
 
-    public void setBaoming(int baoming) {
+    public void setBaoming(String baoming) {
         this.baoming = baoming;
     }
 

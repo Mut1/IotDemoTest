@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_start.setOnClickListener(this);
         ALog.d(TAG, "onCreate");
 
+        connect();
     }
 
 
@@ -60,9 +61,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void start() {
-//        if (!checkReady()) {
-//            return;
-//        }
+        if (!checkReady()) {
+            return;
+        }
         //Intent intent = new Intent(this, ReceiveActivity.class);
         Intent intent = new Intent(this, ResultActivity.class);
           startActivity(intent);
@@ -112,10 +113,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.init:
-                connect();
+             //   connect();
                 break;
             case R.id.deinit:
+
                 deinit();
+                connect();
                 //LinkKit.getInstance().unRegisterOnPushListener(notifyListener);
                 break;
             case R.id.start:

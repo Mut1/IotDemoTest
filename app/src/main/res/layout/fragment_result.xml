@@ -8,25 +8,25 @@
         android:layout_width="wrap_content"
         android:id="@+id/message_total"
         android:textSize="25sp"
-        android:text="xxxxxxx"
+        android:text="加载中。。。。"
         android:layout_margin="5dp"
         android:layout_height="wrap_content"/>
     <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
         android:layout_width="wrap_content"
         android:id="@+id/baoming"
-        android:text="baoming"    android:layout_margin="5dp"
+        android:text="baoming:加载中。。。"    android:layout_margin="5dp"
 
         android:layout_height="wrap_content"/>
     <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
         android:layout_width="wrap_content"
         android:id="@+id/bohelun"    android:layout_margin="5dp"
 
-        android:text="bohelun"
+        android:text="bohelun:加载中。。。"
         android:layout_height="wrap_content"/>
     <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
         android:layout_width="wrap_content"
         android:id="@+id/zuoye"    android:layout_margin="5dp"
 
-        android:text="zuoye"
+        android:text="zuoye:加载中。。。"
         android:layout_height="wrap_content"/>
 </com.qmuiteam.qmui.layout.QMUILinearLayout>
