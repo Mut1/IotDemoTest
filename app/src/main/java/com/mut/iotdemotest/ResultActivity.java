@@ -58,6 +58,9 @@ public class ResultActivity extends BaseActivity {
     private void setViewPager() {
         mTablayoutResult.setupWithViewPager(viewpager_result);
         madpter = new MyfragmentAdapter(getSupportFragmentManager(),mFragmentList);
+
+        madpter.notifyDataSetChanged();
+        // TODO: 适配器监听变化 位置进行调整，未测试。原位置line 96 
         mTablayoutResult.setTabMode(TabLayout.MODE_SCROLLABLE);
         viewpager_result.setAdapter(madpter);
     }
@@ -83,13 +86,14 @@ public class ResultActivity extends BaseActivity {
                else{
                 titles.add(databean1.getBaoming());
                    ResultFragment fm=new ResultFragment();
+                   //创建fragment时，传入车型
                    fm.setMchexing(databean1.getBaoming());
                 mFragmentList.add(fm);
 
             }
                }
             EventBus.getDefault().post(new MessageEvent(messageContent,chexing));
-            madpter.notifyDataSetChanged();
+          //  madpter.notifyDataSetChanged();
         }
         @Override
         public boolean shouldHandle(String s, String s1) {
@@ -113,7 +117,7 @@ public class ResultActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 chexing=tab.getText().toString();
-                tv_result.setText(tab.getText() + "" + tab.getPosition() + tab.getTag());
+              //  tv_result.setText(tab.getText() + "" + tab.getPosition() + tab.getTag());
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -143,6 +147,7 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
     public CharSequence getPageTitle(int position) {
         return titles.get(position);
     }
+
 }
     @Override
     public void onStop() {

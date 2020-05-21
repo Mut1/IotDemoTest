@@ -25,6 +25,7 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
+    private static final String TAG1 = "111";
     private Button btn_init;
     private Button btn_deinit;
     private Button btn_start;
@@ -43,7 +44,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_start.setOnClickListener(this);
         ALog.d(TAG, "onCreate");
 
-        connect();
+      //  connect();
     }
 
 
@@ -76,15 +77,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.d(TAG, "connect() called");
 
         // SDK初始化
-        DemoApplication.productKey = "a1VOjEIP4g7";
-        DemoApplication.deviceName = "xtqMobile";
-        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
+//        DemoApplication.productKey = "a1VOjEIP4g7";
+//        DemoApplication.deviceName = "xtqMobile";
+//        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
         InitManager.init(this, DemoApplication.productKey, DemoApplication.deviceName,
                 DemoApplication.deviceSecret, DemoApplication.productSecret, new IDemoCallback() {
-
                     @Override
                     public void onError(AError aError) {
-                        Log.d(TAG, "onError() called with: aError = [" + aError + "]");
+                        Log.d(TAG1, "onError() called with: aError = [" + aError + "]");
                         // 初始化失败，初始化失败之后需要用户负责重新初始化
                         // 如一开始网络不通导致初始化失败，后续网络回复之后需要重新初始化
                         showToast("初始化失败");
@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void deinit() {
-        ALog.d(TAG, "deinit");
+        ALog.d(TAG1, "deinit");
         DemoApplication.isInitDone = false;
         LinkKit.getInstance().deinit();
         showToast("反初始化成功");
@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.init:
-             //   connect();
+                connect();
                 break;
             case R.id.deinit:
 

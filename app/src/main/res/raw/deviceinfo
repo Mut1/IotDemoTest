@@ -1,0 +1,17 @@
+{
+     "productKey": "a1VOjEIP4g7",
+     "deviceName": "CS_Mobile",
+     "productSecret": "",
+     "deviceSecret": "DsDKIULpaLwI3rbKkmuLItQng0uWJHZY",
+
+     "subDevice": [
+       {
+           "productKey": "",
+           "deviceName": ""
+       },
+       {
+         "productKey": "",
+         "deviceName": ""
+     }
+   ]
+ }

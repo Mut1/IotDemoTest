@@ -87,12 +87,14 @@ public class ResultFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+
     }
     public  void setMchexing(String s)
     {
