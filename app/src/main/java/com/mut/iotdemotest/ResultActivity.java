@@ -11,6 +11,8 @@ import com.blankj.utilcode.util.ArrayUtils;
 import com.blankj.utilcode.util.CollectionUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.mut.iotdemotest.entity.data2;
+
 import org.greenrobot.eventbus.EventBus;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -48,9 +50,9 @@ public class ResultActivity extends BaseActivity {
     private void addData() {
         mFragmentList = new ArrayList<>();
         titles = new ArrayList<>();
+        titles.add("1001");
 //        titles.add("1001");
-//        titles.add("1001");
-//        mFragmentList.add(new ResultFragment());
+        mFragmentList.add(new ResultFragment());
 //        mFragmentList.add(new ResultFragment());
 //        mFragmentList.add(new ResultFragment());
 
@@ -71,12 +73,13 @@ public class ResultActivity extends BaseActivity {
             //数据流转 （设备端的数据发送后到阿里云平台并流转至APP端）
             messageContent = new String((byte[]) aMessage.data);
            // showToast("收到下行消息 topic=" + s1);
-            message_total+=1;
+           // message_total+=1;
             Gson gson= new Gson();
-            databean databean1 =  gson.fromJson(messageContent,databean.class);
-            if (databean1!=null){
+            data2   mdata= gson.fromJson(messageContent,data2.class);
+           // databean databean1 =  gson.fromJson(messageContent,databean.class);
+            if (mdata!=null){
              //   ArrayUtils.contains(titles,"1001");
-               if( titles.contains(databean1.getBaoming()))
+               if( titles.contains(mdata.getMark()))
                {
                   // showToast("已存在");
                  //  titles.add(databean1.getBaoming()+"");
@@ -84,10 +87,10 @@ public class ResultActivity extends BaseActivity {
 
                }
                else{
-                titles.add(databean1.getBaoming());
+                titles.add(mdata.getMark());
                    ResultFragment fm=new ResultFragment();
                    //创建fragment时，传入车型
-                   fm.setMchexing(databean1.getBaoming());
+                   fm.setMchexing(mdata.getMark());
                 mFragmentList.add(fm);
 
             }
@@ -166,7 +169,7 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
     //获取控件
     private void initView() {
         mTablayoutResult = (TabLayout) findViewById(R.id.tablayout_result);
-        tv_result = (TextView) findViewById(R.id.tv_result);
+     //   tv_result = (TextView) findViewById(R.id.tv_result);
         viewpager_result = (ViewPager) findViewById(R.id.viewpager_result);
     }
 }

@@ -77,9 +77,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.d(TAG, "connect() called");
 
         // SDK初始化
-//        DemoApplication.productKey = "a1VOjEIP4g7";
-//        DemoApplication.deviceName = "xtqMobile";
-//        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
+        DemoApplication.productKey = "a1VOjEIP4g7";
+        DemoApplication.deviceName = "xtqMobile";
+        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
         InitManager.init(this, DemoApplication.productKey, DemoApplication.deviceName,
                 DemoApplication.deviceSecret, DemoApplication.productSecret, new IDemoCallback() {
                     @Override
