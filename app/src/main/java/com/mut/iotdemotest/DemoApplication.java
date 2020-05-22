@@ -38,6 +38,7 @@ public class DemoApplication extends Application {
      * 未初始化完成，所有和云端的长链通信都不通
      */
     public static boolean isInitDone = false;
+    public static boolean isIniting = false;
     public static boolean userDevInfoError = false;
     public static DeviceInfoData mDeviceInfoData = null;
     public static String productKey = null, deviceName = null, deviceSecret = null, productSecret = null, password = null, username = null,clientId = null;
@@ -229,11 +230,13 @@ public class DemoApplication extends Application {
 
     private void connect() {
         Log.d(TAG, "connect() called");
+
         // SDK初始化
         MqttConfigure.mqttUserName=username;
        // MqttConfigure.userName = username;
         MqttConfigure.mqttPassWord = password;
         MqttConfigure.clientId = clientId;
+        isIniting=true;
         InitManager.init(this, productKey, deviceName, deviceSecret, productSecret, new IDemoCallback() {
 
             @Override
@@ -241,13 +244,16 @@ public class DemoApplication extends Application {
                 Log.d(TAG1, "onError() called with: aError = [" + aError + "]");
                 // 初始化失败，初始化失败之后需要用户负责重新初始化
                 // 如一开始网络不通导致初始化失败，后续网络回复之后需要重新初始化
+                isIniting=false;
                 showToast("初始化失败");
+
             }
 
             @Override
             public void onInitDone(Object data) {
                 Log.d(TAG, "onInitDone() called with: data = [" + data + "]");
                 showToast("初始化成功");
+                isIniting=false;
                 isInitDone = true;
             }
         });

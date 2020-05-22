@@ -8,20 +8,40 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-<Button
-    android:id="@+id/init"
-    android:text="init"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/deinit"
-        android:text="deint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/start"
-        android:text="start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_nowdata"
+        app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+        app:qmui_borderColor="@color/cardview_dark_background"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"
+        android:text="查看实时数据"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        />
+<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+    android:id="@+id/btn_historydata"
+    app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+    app:qmui_borderColor="@color/cardview_dark_background"
+    app:qmui_borderWidth="0dp"
+    app:qmui_radius="5dp"
+    android:text="查看历史数据"
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:layout_margin="15dp"
+    />
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_refresh"
+        app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+        app:qmui_borderColor="@color/cardview_dark_background"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"
+        android:text="刷新"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        />
+
 
 </LinearLayout>

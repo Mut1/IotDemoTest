@@ -1,5 +1,7 @@
 package com.mut.iotdemotest;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,11 +9,13 @@ import com.aliyun.alink.linkkit.api.LinkKit;
 import com.aliyun.alink.linksdk.cmp.core.base.AMessage;
 import com.aliyun.alink.linksdk.cmp.core.base.ConnectState;
 import com.aliyun.alink.linksdk.cmp.core.listener.IConnectNotifyListener;
+import com.aliyun.alink.linksdk.tools.ALog;
 import com.blankj.utilcode.util.ArrayUtils;
 import com.blankj.utilcode.util.CollectionUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.mut.iotdemotest.entity.data2;
+import com.qmuiteam.qmui.widget.QMUILoadingView;
 
 import org.greenrobot.eventbus.EventBus;
 import java.lang.reflect.Array;
@@ -37,6 +41,9 @@ public class ResultActivity extends BaseActivity {
     private int i;
     public static int message_total = 0;
     public String chexing;
+    private QMUILoadingView mLoadingView;
+    private TextView tv_tip;
+private boolean isLoading=true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,13 +53,14 @@ public class ResultActivity extends BaseActivity {
         initView();     //获取控件
         listener();     //设置tablayout监听
         setViewPager(); //viewpager连接tablayout，viewpager设置适配器
+
     }
     private void addData() {
         mFragmentList = new ArrayList<>();
         titles = new ArrayList<>();
-        titles.add("1001");
+       // titles.add("1001");
 //        titles.add("1001");
-        mFragmentList.add(new ResultFragment());
+      //  mFragmentList.add(new ResultFragment());
 //        mFragmentList.add(new ResultFragment());
 //        mFragmentList.add(new ResultFragment());
 
@@ -61,7 +69,7 @@ public class ResultActivity extends BaseActivity {
         mTablayoutResult.setupWithViewPager(viewpager_result);
         madpter = new MyfragmentAdapter(getSupportFragmentManager(),mFragmentList);
 
-        madpter.notifyDataSetChanged();
+       // madpter.notifyDataSetChanged();
         // TODO: 适配器监听变化 位置进行调整，未测试。原位置line 96 
         mTablayoutResult.setTabMode(TabLayout.MODE_SCROLLABLE);
         viewpager_result.setAdapter(madpter);
@@ -72,7 +80,7 @@ public class ResultActivity extends BaseActivity {
         public void onNotify(String s, String s1, AMessage aMessage) {
             //数据流转 （设备端的数据发送后到阿里云平台并流转至APP端）
             messageContent = new String((byte[]) aMessage.data);
-           // showToast("收到下行消息 topic=" + s1);
+            Log.d(TAG,"收到下行消息 topic=" + s1);
            // message_total+=1;
             Gson gson= new Gson();
             data2   mdata= gson.fromJson(messageContent,data2.class);
@@ -81,22 +89,33 @@ public class ResultActivity extends BaseActivity {
              //   ArrayUtils.contains(titles,"1001");
                if( titles.contains(mdata.getMark()))
                {
+
                   // showToast("已存在");
                  //  titles.add(databean1.getBaoming()+"");
                   // mFragmentList.add(new ResultFragment());
 
                }
                else{
+                   if(isLoading) {
+                       mLoadingView.stop();
+                       mLoadingView.setVisibility(View.GONE);
+                       isLoading=false;
+                   }
+                   if(tv_tip.getText()!=null)
+                   {
+                       tv_tip.setText("");
+                   }
                 titles.add(mdata.getMark());
                    ResultFragment fm=new ResultFragment();
                    //创建fragment时，传入车型
                    fm.setMchexing(mdata.getMark());
                 mFragmentList.add(fm);
-
-            }
+               }
                }
             EventBus.getDefault().post(new MessageEvent(messageContent,chexing));
-          //  madpter.notifyDataSetChanged();
+            madpter.notifyDataSetChanged();
+            ALog.e(TAG,"接受一次数据");
+
         }
         @Override
         public boolean shouldHandle(String s, String s1) {
@@ -104,6 +123,7 @@ public class ResultActivity extends BaseActivity {
         }
         @Override
         public void onConnectStateChange(String s, ConnectState connectState) {
+            Log.e(TAG,"网络连接变化");
         }
     };
 
@@ -171,5 +191,29 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
         mTablayoutResult = (TabLayout) findViewById(R.id.tablayout_result);
      //   tv_result = (TextView) findViewById(R.id.tv_result);
         viewpager_result = (ViewPager) findViewById(R.id.viewpager_result);
+        mLoadingView=(QMUILoadingView) findViewById(R.id.loading_view);
+        tv_tip=(TextView)findViewById(R.id.tv_tip);
+        mLoadingView.start();
+        mCountDownTimer_loading.start();
     }
+    private CountDownTimer mCountDownTimer_loading = new CountDownTimer(100000, 5000) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+           Log.d(TAG, "剩余" + (millisUntilFinished / 1000) + "秒");
+        }
+
+        @Override
+        public void onFinish() {
+            Log.d(TAG, "倒计时结束");
+            if(isLoading) {
+                mLoadingView.stop();
+                isLoading = false;
+                mLoadingView.setVisibility(View.GONE);
+
+                tv_tip.setText("未收到传感器数据！");
+            }
+            mCountDownTimer_loading.cancel();
+        }
+    };
 }

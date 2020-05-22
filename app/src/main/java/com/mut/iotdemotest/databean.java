@@ -1,5 +1,9 @@
 package com.mut.iotdemotest;
 
+/**
+ * 已经弃用
+ * 已经弃用
+ */
 public class databean  {
     /**
      * chesu : 0

@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.layout.QMUILinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <com.qmuiteam.qmui.widget.QMUILoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        app:qmui_loading_view_size="50dp"
+        android:layout_centerInParent="true"
 
+        android:layout_height="match_parent"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_tip"
+        android:layout_centerInParent="true"
+
+        />
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </com.google.android.material.tabs.TabLayout>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_result"
+android:layout_below="@+id/tablayout_result"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-</com.qmuiteam.qmui.layout.QMUILinearLayout>
+        android:layout_height="match_parent" />
+</RelativeLayout>

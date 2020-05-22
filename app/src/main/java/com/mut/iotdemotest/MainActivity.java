@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LanguageUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,9 +27,11 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
     private static final String TAG1 = "111";
-    private Button btn_init;
-    private Button btn_deinit;
-    private Button btn_start;
+
+    private QMUIRoundButton btn_nowdata;
+    private QMUIRoundButton btn_historydata;
+    private QMUIRoundButton btn_refresh;
+
     private List<databean> databeanList;
 
 
@@ -36,12 +39,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn_init=(Button)findViewById(R.id.init);
-        btn_deinit=(Button)findViewById(R.id.deinit);
-        btn_start=(Button)findViewById(R.id.start);
-        btn_init.setOnClickListener(this);
-        btn_deinit.setOnClickListener(this);
-        btn_start.setOnClickListener(this);
+        btn_nowdata=(QMUIRoundButton)findViewById(R.id.btn_nowdata);
+        btn_historydata=(QMUIRoundButton)findViewById(R.id.btn_historydata);
+        btn_refresh=(QMUIRoundButton)findViewById(R.id.btn_refresh);
+        btn_nowdata.setOnClickListener(this);
+        btn_historydata.setOnClickListener(this);
+        btn_refresh.setOnClickListener(this);
         ALog.d(TAG, "onCreate");
 
       //  connect();
@@ -74,12 +77,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * 初始化
      */
     private void connect() {
-        Log.d(TAG, "connect() called");
+        if(DemoApplication.isInitDone)
+        {
+            showToast("初始化已经完成");
 
+        }
+
+        else
+        {
+        Log.d(TAG, "connect() called");
+DemoApplication.isIniting=true;
         // SDK初始化
-        DemoApplication.productKey = "a1VOjEIP4g7";
-        DemoApplication.deviceName = "xtqMobile";
-        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
+//        DemoApplication.productKey = "a1VOjEIP4g7";
+//        DemoApplication.deviceName = "xtqMobile";
+//        DemoApplication.deviceSecret = "y9f1KLJ0yHDIAzj1RSnirMInw0RPGTPt";
         InitManager.init(this, DemoApplication.productKey, DemoApplication.deviceName,
                 DemoApplication.deviceSecret, DemoApplication.productSecret, new IDemoCallback() {
                     @Override
@@ -88,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         // 初始化失败，初始化失败之后需要用户负责重新初始化
                         // 如一开始网络不通导致初始化失败，后续网络回复之后需要重新初始化
                         showToast("初始化失败");
+                        DemoApplication.isIniting=false;
                     }
 
                     @Override
@@ -95,15 +107,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         Log.d(TAG, "onInitDone() called with: data = [" + data + "]");
                         DemoApplication.isInitDone = true;
                         showToast("初始化成功");
+                        DemoApplication.isIniting=false;
+
                     }
-                });
+                });}
     }
 
     private void deinit() {
+
         ALog.d(TAG1, "deinit");
-        DemoApplication.isInitDone = false;
+if(DemoApplication.isIniting)
+{
+    showToast("正在初始化中，请稍后再点击！");
+
+}else if (DemoApplication.isIniting==false)
+{
         LinkKit.getInstance().deinit();
-        showToast("反初始化成功");
+        DemoApplication.isInitDone = false;
+        //showToast("反初始化成功");
+}
     }
 
 
@@ -112,17 +134,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.init:
-                connect();
-                break;
-            case R.id.deinit:
+            case R.id.btn_refresh:
 
                 deinit();
                 connect();
+                break;
+            case R.id.btn_nowdata:
+
+                start();
                 //LinkKit.getInstance().unRegisterOnPushListener(notifyListener);
                 break;
-            case R.id.start:
-                start();
+            case R.id.btn_historydata:
+
                 break;
         }
 
