@@ -15,6 +15,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -43,6 +48,7 @@ public class ResultFragment extends Fragment {
     public TextView HanZL;
     public TextView PoSL;
     public TextView LiZLL;
+   private DecimalFormat df ;
 
     @Nullable
     @Override
@@ -61,6 +67,7 @@ public class ResultFragment extends Fragment {
     }
 
     private void initview() {
+        df =new DecimalFormat("#.000");
         tv_mark = (QMUIAlphaTextView) getView().findViewById(R.id.tv_mark);
         tv_time = (QMUIAlphaTextView) getView().findViewById(R.id.tv_time);
         tv_weidu = (TextView) getView().findViewById(R.id.tv_weidu);
@@ -146,9 +153,9 @@ public class ResultFragment extends Fragment {
     }
     private void setData(data2 data) {
         data2 mdatabean2 = data;
-        tv_time.setText(mdatabean2.getTime());
-        tv_weidu.setText(mdatabean2.getN());
-        tv_jingdu.setText(mdatabean2.getE());
+        tv_time.setText(addDateMinut(mdatabean2.getTime(),8));
+        tv_weidu.setText(df.format((Double.valueOf(mdatabean2.getN()))/100));
+        tv_jingdu.setText(df.format((Double.valueOf(mdatabean2.getE()))/100));
         tv_bohelun.setText(mdatabean2.getBohelun());
         tv_zuoye .setText(mdatabean2.getZuoye());
         tv_fukuan .setText(mdatabean2.getFukuan());
@@ -166,5 +173,25 @@ public class ResultFragment extends Fragment {
         PoSL .setText(mdatabean2.getPoSL());
         LiZLL .setText(mdatabean2.getLiZLL());
     }
+    //当前时间串+n个小时
+    public static String addDateMinut(String time, int hour){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(time);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (date == null)
+            return "";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR, hour);// 24小时制
+        date = cal.getTime();
+        cal = null;
+        return format.format(date);
+
+    }
+
 
 }
