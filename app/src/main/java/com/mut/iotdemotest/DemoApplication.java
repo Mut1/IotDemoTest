@@ -30,6 +30,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class DemoApplication extends Application {
     private static final String TAG = "DemoApplication";
     private static final String TAG1 = "111";
@@ -108,11 +110,22 @@ public class DemoApplication extends Application {
 
 
 
-    private void showToast(final String message) {
+    private void showToast_success(final String message) {
         ThreadTools.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+                Toasty.success(DemoApplication.this, message, Toast.LENGTH_SHORT, true).show();
+
+            }
+        });
+    }
+    private void showToast_error(final String message) {
+        ThreadTools.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+                Toasty.error(DemoApplication.this, message, Toast.LENGTH_SHORT, true).show();
             }
         });
     }
@@ -245,14 +258,17 @@ public class DemoApplication extends Application {
                 // 初始化失败，初始化失败之后需要用户负责重新初始化
                 // 如一开始网络不通导致初始化失败，后续网络回复之后需要重新初始化
                 isIniting=false;
-                showToast("初始化失败");
+              //  showToast("初始化失败");
+                showToast_error("服务器连接失败");
+
 
             }
 
             @Override
             public void onInitDone(Object data) {
                 Log.d(TAG, "onInitDone() called with: data = [" + data + "]");
-                showToast("初始化成功");
+               // showToast("初始化成功");
+                showToast_success("服务器连接成功");
                 isIniting=false;
                 isInitDone = true;
             }

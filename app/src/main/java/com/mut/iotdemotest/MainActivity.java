@@ -14,6 +14,7 @@ import com.aliyun.alink.linksdk.tools.AError;
 import com.aliyun.alink.linksdk.tools.ALog;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LanguageUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -54,17 +55,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean checkReady() {
         if (DemoApplication.userDevInfoError) {
-            showToast("设备三元组信息res/raw/deviceinfo格式错误");
+            showToast_error("设备三元组信息res/raw/deviceinfo格式错误");
             return false;
         }
         if (!DemoApplication.isInitDone) {
-            showToast("初始化尚未成功，请稍后点击");
+            showToast_error("初始化尚未成功，请稍后点击");
             return false;
         }
         return true;
     }
 
-    public void start() {
+    public void start_NowData() {
         if (!checkReady()) {
             return;
         }
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void connect() {
         if(DemoApplication.isInitDone)
         {
-            showToast("初始化已经完成");
+            showToast_info("初始化已经完成");
 
         }
 
@@ -98,7 +99,7 @@ DemoApplication.isIniting=true;
                         Log.d(TAG1, "onError() called with: aError = [" + aError + "]");
                         // 初始化失败，初始化失败之后需要用户负责重新初始化
                         // 如一开始网络不通导致初始化失败，后续网络回复之后需要重新初始化
-                        showToast("初始化失败");
+                        showToast_error("初始化失败");
                         DemoApplication.isIniting=false;
                     }
 
@@ -106,7 +107,8 @@ DemoApplication.isIniting=true;
                     public void onInitDone(Object data) {
                         Log.d(TAG, "onInitDone() called with: data = [" + data + "]");
                         DemoApplication.isInitDone = true;
-                        showToast("初始化成功");
+
+                        showToast_success("初始化成功");
                         DemoApplication.isIniting=false;
 
                     }
@@ -116,16 +118,11 @@ DemoApplication.isIniting=true;
     private void deinit() {
 
         ALog.d(TAG1, "deinit");
-if(DemoApplication.isIniting)
-{
-    showToast("正在初始化中，请稍后再点击！");
 
-}else if (DemoApplication.isIniting==false)
-{
-        LinkKit.getInstance().deinit();
-        DemoApplication.isInitDone = false;
-        //showToast("反初始化成功");
-}
+            LinkKit.getInstance().deinit();
+            DemoApplication.isInitDone = false;
+            //showToast("反初始化成功");
+
     }
 
 
@@ -135,17 +132,21 @@ if(DemoApplication.isIniting)
         switch (v.getId())
         {
             case R.id.btn_refresh:
+                if (DemoApplication.isIniting) {
+                  //  showToast("正在初始化中，请稍后再点击！");
+                return;
+                } else if (DemoApplication.isIniting == false) {
+                    deinit();
+                    connect();
+                }
 
-                deinit();
-                connect();
                 break;
             case R.id.btn_nowdata:
-
-                start();
+                start_NowData();
                 //LinkKit.getInstance().unRegisterOnPushListener(notifyListener);
                 break;
             case R.id.btn_historydata:
-
+                showToast_info("暂未开放查询！");
                 break;
         }
 

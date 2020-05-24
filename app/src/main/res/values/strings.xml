@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">IotDemoTest</string>
+    <string name="app_name">明杰科技</string>
+    <string name="error">无数据!</string>
 </resources>

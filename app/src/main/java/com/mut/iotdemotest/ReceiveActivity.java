@@ -14,6 +14,10 @@ import com.qmuiteam.qmui.alpha.QMUIAlphaTextView;
 
 import androidx.annotation.Nullable;
 
+/**
+ *
+ * 废弃
+ */
 public class ReceiveActivity extends BaseActivity {
     public String message[] = new String[100];
     private String messageContent;
@@ -45,7 +49,7 @@ public class ReceiveActivity extends BaseActivity {
         @Override
         //s是LINK_PRESISTENT    s1是topic名称
         public void onNotify(String s, String s1, AMessage aMessage) {
-            showToast("收到下行消息 topic=" + s1);
+            showToast_info("收到下行消息 topic=" + s1);
             message_total += 1;
             //数据流转 （设备端的数据发送后到阿里云平台并流转至APP端）
             messageContent = new String((byte[]) aMessage.data);

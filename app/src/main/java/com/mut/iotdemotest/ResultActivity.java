@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.CollectionUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.mut.iotdemotest.entity.data2;
+import com.orient.me.widget.placeholder.StatusView;
 import com.qmuiteam.qmui.widget.QMUILoadingView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,6 +45,8 @@ public class ResultActivity extends BaseActivity {
     private QMUILoadingView mLoadingView;
     private TextView tv_tip;
 private boolean isLoading=true;
+
+private StatusView mStatusView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,8 +100,9 @@ private boolean isLoading=true;
                }
                else{
                    if(isLoading) {
-                       mLoadingView.stop();
-                       mLoadingView.setVisibility(View.GONE);
+                      // mLoadingView.stop();
+                      // mLoadingView.setVisibility(View.GONE);
+                       mStatusView.setVisibility(View.GONE);
                        isLoading=false;
                    }
                    if(tv_tip.getText()!=null)
@@ -193,8 +197,12 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
         viewpager_result = (ViewPager) findViewById(R.id.viewpager_result);
         mLoadingView=(QMUILoadingView) findViewById(R.id.loading_view);
         tv_tip=(TextView)findViewById(R.id.tv_tip);
-        mLoadingView.start();
+        mLoadingView.setVisibility(View.GONE);
+       // mLoadingView.start();
         mCountDownTimer_loading.start();
+
+        mStatusView=findViewById(R.id.et_content);
+        mStatusView.triggerLoading();
     }
     private CountDownTimer mCountDownTimer_loading = new CountDownTimer(100000, 5000) {
 
@@ -207,11 +215,12 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
         public void onFinish() {
             Log.d(TAG, "倒计时结束");
             if(isLoading) {
-                mLoadingView.stop();
+               // mLoadingView.stop();
                 isLoading = false;
-                mLoadingView.setVisibility(View.GONE);
-
-                tv_tip.setText("未收到传感器数据！");
+                //  mLoadingView.setVisibility(View.GONE);
+           // mStatusView.triggerError(R.string.error);
+              mStatusView.triggerEmpty();
+             //   tv_tip.setText("未收到传感器数据！");
             }
             mCountDownTimer_loading.cancel();
         }

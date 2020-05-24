@@ -4,6 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <com.orient.me.widget.placeholder.StatusView
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <com.qmuiteam.qmui.widget.QMUILoadingView
         android:id="@+id/loading_view"
         android:layout_width="match_parent"

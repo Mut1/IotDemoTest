@@ -7,12 +7,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aliyun.alink.linksdk.tools.ALog;
+import com.aliyun.alink.linksdk.tools.ThreadTools;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import es.dmoral.toasty.Toasty;
 
 public class BaseActivity extends AppCompatActivity {
     protected static SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -27,12 +29,34 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    public void showToast(final String message){
-        ALog.d(TAG, "showToast() called with: message = [" + message + "]");
-        runOnUiThread(new Runnable() {
+
+    public void showToast_success(final String message) {
+        ThreadTools.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+                Toasty.success(getBaseContext(), message, Toast.LENGTH_SHORT, true).show();
+
+            }
+        });
+    }
+    public void showToast_error(final String message) {
+        ThreadTools.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+                Toasty.error(getBaseContext(), message, Toast.LENGTH_SHORT, true).show();
+
+            }
+        });
+    }
+    public void showToast_info(final String message) {
+        ThreadTools.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Toast.makeText(DemoApplication.this, message, Toast.LENGTH_SHORT).show();
+
+                Toasty.info(getBaseContext(), message, Toast.LENGTH_SHORT, true).show();
             }
         });
     }

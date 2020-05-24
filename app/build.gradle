@@ -44,4 +44,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+    // 注意是否是最新版本
+    implementation 'com.orient:Orient-Ui:2.1.0'
 }
