@@ -52,6 +52,25 @@ public class data2  {
     private String FongJZS;
     private String YuLSD;
     private String LiZLL;
+private String CANerr;
+
+    public String getCANerr() {
+        return CANerr;
+    }
+
+    public void setCANerr(String CANerr) {
+        this.CANerr = CANerr;
+    }
+
+    public String getGPSerr() {
+        return GPSerr;
+    }
+
+    public void setGPSerr(String GPSerr) {
+        this.GPSerr = GPSerr;
+    }
+
+    private  String GPSerr;
 
     public String getChesu() {
         return Chesu;

@@ -204,7 +204,7 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
         mStatusView=findViewById(R.id.et_content);
         mStatusView.triggerLoading();
     }
-    private CountDownTimer mCountDownTimer_loading = new CountDownTimer(100000, 5000) {
+    private CountDownTimer mCountDownTimer_loading = new CountDownTimer(60000, 5000) {
 
         @Override
         public void onTick(long millisUntilFinished) {
