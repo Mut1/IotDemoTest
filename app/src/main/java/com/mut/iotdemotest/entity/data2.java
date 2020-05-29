@@ -1,6 +1,38 @@
 package com.mut.iotdemotest.entity;
 
 public class data2  {
+    @Override
+    public String toString() {
+        return "data2{" +
+                "Chesu='" + Chesu + '\'' +
+                ", HanZL='" + HanZL + '\'' +
+                ", E='" + E + '\'' +
+                ", Getai='" + Getai + '\'' +
+                ", Mark='" + Mark + '\'' +
+                ", Time='" + Time + '\'' +
+                ", N='" + N + '\'' +
+                ", Fukuan='" + Fukuan + '\'' +
+                ", QieLTL='" + QieLTL + '\'' +
+                ", LiZSP='" + LiZSP + '\'' +
+                ", ZongZTL='" + ZongZTL + '\'' +
+                ", Shusongzhou='" + Shusongzhou + '\'' +
+                ", PoSL='" + PoSL + '\'' +
+                ", QuDL='" + QuDL + '\'' +
+                ", Zuoye='" + Zuoye + '\'' +
+                ", ZaYSP='" + ZaYSP + '\'' +
+                ", QinXSS='" + QinXSS + '\'' +
+                ", ZhengDS='" + ZhengDS + '\'' +
+                ", Bohelun='" + Bohelun + '\'' +
+                ", GeCGD='" + GeCGD + '\'' +
+                ", JiaDSS='" + JiaDSS + '\'' +
+                ", FongJZS='" + FongJZS + '\'' +
+                ", YuLSD='" + YuLSD + '\'' +
+                ", LiZLL='" + LiZLL + '\'' +
+                ", CANerr='" + CANerr + '\'' +
+                ", GPSerr='" + GPSerr + '\'' +
+                '}';
+    }
+
     /**
      * Chesu : 72
      * HanZL : 4

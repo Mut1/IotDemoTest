@@ -51,58 +51,58 @@ public class DemoApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ALog.setLevel(ALog.LEVEL_DEBUG);
-        // 从 raw 读取  三元组信息
-        String testData = getFromRaw();
-        // 解析数据
-        getDeviceInfoFrom(testData);
-
-        if (TextUtils.isEmpty(deviceSecret)) {
-           tryGetFromSP();
-        }
-        if (TextUtils.isEmpty(deviceSecret) && !TextUtils.isEmpty(productSecret)) {
-            InitManager.registerDevice(this, productKey, deviceName, productSecret, new IConnectSendListener() {
-                @Override
-                public void onResponse(ARequest aRequest, AResponse aResponse) {
-                    Log.d(TAG, "onResponse() called with: aRequest = [" + aRequest + "], aResponse = [" + (aResponse == null ? "null" : aResponse.data) + "]");
-                    if (aResponse != null && aResponse.data != null) {
-                        // 解析云端返回的数据
-                        ResponseModel<Map<String, String>> response = JSONObject.parseObject(aResponse.data.toString(),
-                                new TypeReference<ResponseModel<Map<String, String>>>() {
-                                }.getType());
-                        if ("200".equals(response.code) && response.data != null && response.data.containsKey("deviceSecret") &&
-                                !TextUtils.isEmpty(response.data.get("deviceSecret"))) {
-                            /**
-                             * 建议将ds保存在非应用目录，确保卸载之后ds仍然可以读取到。
-                             */
-                            deviceSecret = response.data.get("deviceSecret");
-                            // getDeviceSecret success, to build connection.
-                            // 持久化 deviceSecret 初始化建联的时候需要
-                            // 用户需要按照实际场景持久化设备的三元组信息，用于后续的连接
-                            SharedPreferences preferences = getSharedPreferences("deviceAuthInfo", 0);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("deviceId", productKey+deviceName);
-                            editor.putString("deviceSecret", deviceSecret);
-                            //提交当前数据
-                            editor.commit();
-                            connect();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(ARequest aRequest, AError aError) {
-                    Log.d(TAG, "onFailure() called with: aRequest = [" + aRequest + "], aError = [" + aError + "]");
-                }
-            });
-        }
-        else if (!TextUtils.isEmpty(deviceSecret) || !TextUtils.isEmpty(password)){
-             //三元组信息正确的话，进入APP会调用一次连接 init
-              connect();
-            // Log.e(TAG, "这里执行了");
-        } else {
-            Log.e(TAG, "res/raw/deviceinfo invalid.");
-        }
+//        ALog.setLevel(ALog.LEVEL_DEBUG);
+//        // 从 raw 读取  三元组信息
+//        String testData = getFromRaw();
+//        // 解析数据
+//        getDeviceInfoFrom(testData);
+//
+//        if (TextUtils.isEmpty(deviceSecret)) {
+//           tryGetFromSP();
+//        }
+//        if (TextUtils.isEmpty(deviceSecret) && !TextUtils.isEmpty(productSecret)) {
+//            InitManager.registerDevice(this, productKey, deviceName, productSecret, new IConnectSendListener() {
+//                @Override
+//                public void onResponse(ARequest aRequest, AResponse aResponse) {
+//                    Log.d(TAG, "onResponse() called with: aRequest = [" + aRequest + "], aResponse = [" + (aResponse == null ? "null" : aResponse.data) + "]");
+//                    if (aResponse != null && aResponse.data != null) {
+//                        // 解析云端返回的数据
+//                        ResponseModel<Map<String, String>> response = JSONObject.parseObject(aResponse.data.toString(),
+//                                new TypeReference<ResponseModel<Map<String, String>>>() {
+//                                }.getType());
+//                        if ("200".equals(response.code) && response.data != null && response.data.containsKey("deviceSecret") &&
+//                                !TextUtils.isEmpty(response.data.get("deviceSecret"))) {
+//                            /**
+//                             * 建议将ds保存在非应用目录，确保卸载之后ds仍然可以读取到。
+//                             */
+//                            deviceSecret = response.data.get("deviceSecret");
+//                            // getDeviceSecret success, to build connection.
+//                            // 持久化 deviceSecret 初始化建联的时候需要
+//                            // 用户需要按照实际场景持久化设备的三元组信息，用于后续的连接
+//                            SharedPreferences preferences = getSharedPreferences("deviceAuthInfo", 0);
+//                            SharedPreferences.Editor editor = preferences.edit();
+//                            editor.putString("deviceId", productKey+deviceName);
+//                            editor.putString("deviceSecret", deviceSecret);
+//                            //提交当前数据
+//                            editor.commit();
+//                            connect();
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(ARequest aRequest, AError aError) {
+//                    Log.d(TAG, "onFailure() called with: aRequest = [" + aRequest + "], aError = [" + aError + "]");
+//                }
+//            });
+//        }
+//        else if (!TextUtils.isEmpty(deviceSecret) || !TextUtils.isEmpty(password)){
+//             //三元组信息正确的话，进入APP会调用一次连接 init
+//              connect();
+//            // Log.e(TAG, "这里执行了");
+//        } else {
+//            Log.e(TAG, "res/raw/deviceinfo invalid.");
+//        }
     }
 
 
@@ -245,7 +245,7 @@ public class DemoApplication extends Application {
         Log.d(TAG, "connect() called");
 
         // SDK初始化
-        MqttConfigure.mqttUserName=username;
+        MqttConfigure.mqttUserName = username;
        // MqttConfigure.userName = username;
         MqttConfigure.mqttPassWord = password;
         MqttConfigure.clientId = clientId;

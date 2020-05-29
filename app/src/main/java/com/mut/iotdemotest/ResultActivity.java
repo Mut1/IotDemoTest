@@ -20,7 +20,10 @@ import com.qmuiteam.qmui.widget.QMUILoadingView;
 
 import org.greenrobot.eventbus.EventBus;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +31,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import xiaofei.library.datastorage.DataStorageFactory;
+import xiaofei.library.datastorage.IDataStorage;
 
 public class ResultActivity extends BaseActivity {
     private TabLayout mTablayoutResult;
@@ -39,14 +44,13 @@ public class ResultActivity extends BaseActivity {
     //MQTT监听参数
     public String message[] = new String[100];
     private String messageContent;
-    private int i;
     public static int message_total = 0;
     public String chexing;
     private QMUILoadingView mLoadingView;
-    private TextView tv_tip;
 private boolean isLoading=true;
 
 private StatusView mStatusView;
+private List<data2>  mData2List;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,15 +62,12 @@ private StatusView mStatusView;
         setViewPager(); //viewpager连接tablayout，viewpager设置适配器
 
     }
+
+
     private void addData() {
         mFragmentList = new ArrayList<>();
         titles = new ArrayList<>();
-       // titles.add("1001");
-//        titles.add("1001");
-      //  mFragmentList.add(new ResultFragment());
-//        mFragmentList.add(new ResultFragment());
-//        mFragmentList.add(new ResultFragment());
-
+        mData2List=new ArrayList<>();
     }
     private void setViewPager() {
         mTablayoutResult.setupWithViewPager(viewpager_result);
@@ -84,30 +85,24 @@ private StatusView mStatusView;
             //数据流转 （设备端的数据发送后到阿里云平台并流转至APP端）
             messageContent = new String((byte[]) aMessage.data);
             Log.d(TAG,"收到下行消息 topic=" + s1);
-           // message_total+=1;
             Gson gson= new Gson();
             data2   mdata= gson.fromJson(messageContent,data2.class);
-           // databean databean1 =  gson.fromJson(messageContent,databean.class);
+            Log.d(TAG,"收到信息包" + mdata);
+
+            IDataStorage dataStorage = DataStorageFactory.getInstance(getApplicationContext(), DataStorageFactory.TYPE_DATABASE);
+            int i = dataStorage.loadAll(data2.class).size();
+            Log.e("title","数据库长度:"+i);
+            Log.e("title","时间:"+addDatehour(mdata.getTime(),8));
+            dataStorage.storeOrUpdate(mdata,String.valueOf(i));
             if (mdata!=null){
-             //   ArrayUtils.contains(titles,"1001");
                if( titles.contains(mdata.getMark()))
                {
-
-                  // showToast("已存在");
-                 //  titles.add(databean1.getBaoming()+"");
-                  // mFragmentList.add(new ResultFragment());
 
                }
                else{
                    if(isLoading) {
-                      // mLoadingView.stop();
-                      // mLoadingView.setVisibility(View.GONE);
                        mStatusView.setVisibility(View.GONE);
                        isLoading=false;
-                   }
-                   if(tv_tip.getText()!=null)
-                   {
-                       tv_tip.setText("");
                    }
                 titles.add(mdata.getMark());
                    ResultFragment fm=new ResultFragment();
@@ -131,20 +126,13 @@ private StatusView mStatusView;
         }
     };
 
-    private void addtab() {
-        mTablayoutResult.addTab(mTablayoutResult.newTab().setText("cs1").setTag("tag1"), true);
-        mTablayoutResult.addTab(mTablayoutResult.newTab().setText("cs2"));
-        mTablayoutResult.addTab(mTablayoutResult.newTab().setText("cs3"));
-        mTablayoutResult.addTab(mTablayoutResult.newTab().setText("cs4"));
-        mTablayoutResult.setTabMode(TabLayout.MODE_SCROLLABLE);
-    }
+
 
     private void listener() {
         mTablayoutResult.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                chexing=tab.getText().toString();
-              //  tv_result.setText(tab.getText() + "" + tab.getPosition() + tab.getTag());
+
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -196,7 +184,6 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
      //   tv_result = (TextView) findViewById(R.id.tv_result);
         viewpager_result = (ViewPager) findViewById(R.id.viewpager_result);
         mLoadingView=(QMUILoadingView) findViewById(R.id.loading_view);
-        tv_tip=(TextView)findViewById(R.id.tv_tip);
         mLoadingView.setVisibility(View.GONE);
        // mLoadingView.start();
         mCountDownTimer_loading.start();
@@ -215,14 +202,32 @@ public class MyfragmentAdapter extends FragmentPagerAdapter
         public void onFinish() {
             Log.d(TAG, "倒计时结束");
             if(isLoading) {
-               // mLoadingView.stop();
                 isLoading = false;
-                //  mLoadingView.setVisibility(View.GONE);
-           // mStatusView.triggerError(R.string.error);
               mStatusView.triggerEmpty();
-             //   tv_tip.setText("未收到传感器数据！");
             }
             mCountDownTimer_loading.cancel();
         }
     };
+
+    //当前时间串+n个小时
+    public static String addDatehour(String time, int hour) {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(time);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (date == null)
+            return "";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR, hour);// 24小时制
+        date = cal.getTime();
+        cal = null;
+        return format.format(date);
+
+    }
+
+
 }

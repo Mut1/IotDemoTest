@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/export_button"
+
+        app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+        app:qmui_borderColor="@color/cardview_dark_background"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"
+        android:text="导出数据"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/open_button"
+
+        app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+        app:qmui_borderColor="@color/cardview_dark_background"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"
+        android:text="打开文件夹"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        />
+
+</LinearLayout>

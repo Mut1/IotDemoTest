@@ -32,6 +32,18 @@
     android:layout_margin="15dp"
     />
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_excel"
+        app:qmui_backgroundColor="@color/qmui_config_color_pressed"
+        app:qmui_borderColor="@color/cardview_dark_background"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"
+        android:text="数据导出"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/btn_refresh"
         app:qmui_backgroundColor="@color/qmui_config_color_pressed"
         app:qmui_borderColor="@color/cardview_dark_background"

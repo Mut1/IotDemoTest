@@ -1,7 +1,6 @@
-package com.mut.iotdemotest;
+package com.mut.iotdemotest.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,27 +9,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.TimeUtils;
 import com.google.gson.Gson;
+import com.mut.iotdemotest.MessageEvent;
+import com.mut.iotdemotest.R;
 import com.mut.iotdemotest.entity.data2;
 import com.qmuiteam.qmui.alpha.QMUIAlphaTextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import xiaofei.library.datastorage.DataStorageFactory;
+import xiaofei.library.datastorage.IDataStorage;
+import xiaofei.library.datastorage.util.Condition;
 
-public class ResultFragment extends Fragment {
-
-    private String messageContent;
-    private String mark;
+public class HistoryFragment  extends Fragment {
     public QMUIAlphaTextView tv_mark;
     public QMUIAlphaTextView tv_time;
     public TextView tv_weidu;
@@ -57,11 +61,13 @@ public class ResultFragment extends Fragment {
     public TextView tv_QuDL;
     public TextView tv_ZhengDS;
     private DecimalFormat df;
-
+    private List<data2> mdatalist;
+    private String id;
+    private String time;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
 
     }
 
@@ -69,12 +75,12 @@ public class ResultFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initview();
-
-        tv_mark.setText(mark);
+        setData(getdata());
 
     }
 
     private void initview() {
+        mdatalist = new ArrayList<>();
         df = new DecimalFormat("#.0000000");
         tv_mark = (QMUIAlphaTextView) getView().findViewById(R.id.tv_mark);
         tv_time = (QMUIAlphaTextView) getView().findViewById(R.id.tv_time);
@@ -102,25 +108,16 @@ public class ResultFragment extends Fragment {
         tv_ZhengDS = getView().findViewById(R.id.tv_ZhengDS);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-// TODO
-
-        // message_total.setText((ResultActivity)getActivity().getchexing());
-        messageContent = event.getJSON();
-        //  mchexing=event.getChexing();
-        Gson gson = new Gson();
-        data2 mdatabean2 = gson.fromJson(messageContent, data2.class);
-        if (mdatabean2 != null) {
-            if ((mdatabean2.getMark()).equals(mark)) {
-//  ALog.e(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                setData(mdatabean2);
-            }
-        }
-
-    }
-
-    ;
+public data2 getdata() {
+    IDataStorage dataStorage = DataStorageFactory.getInstance(getActivity(), DataStorageFactory.TYPE_DATABASE);
+    List<data2> list = dataStorage.load(data2.class, new Condition<data2>() {
+                @Override
+                public boolean satisfy(data2 o) {
+                    return o.getTime()==time;
+                }
+            });
+    return list.get(list.size()-1);
+}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,15 +134,7 @@ public class ResultFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        messageContent="{\"Chesu\":\"72\",\"HanZL\":\"4\",\"E\":\"1920.658\",\"Getai\":\"86\",\"Mark\":\"A100101\",\"Time\":\"12:32:5\",\"N\":\"230.125\",\"Fukuan\":\"338\",\"QieLTL\":\"17\",\"LiZSP\":\"690\",\"ZongZTL\":\"680\",\"Shusongzhou\":\"192\",\"PoSL\":\"0\",\"QuDL\":\"14\",\"Zuoye\":\"0\",\"ZaYSP\":\"14\",\"QinXSS\":\"9\",\"ZhengDS\":\"332\",\"Bohelun\":\"27\",\"GeCGD\":\"44\",\"JiaDSS\":\"583\",\"FongJZS\":\"1495\",\"YuLSD\":\"9\",\"LiZLL\":\"3\"}";
-//        Gson gson = new Gson();
-//        data2 mdatabean2= gson.fromJson(messageContent,data2.class);
-//        if (mdatabean2 != null) {
-//
-//            setData(mdatabean2);
-//
-//        }
-        EventBus.getDefault().register(this);
+
 
     }
 
@@ -158,64 +147,37 @@ public class ResultFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        EventBus.getDefault().unregister(this);
+
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
+
 
     }
 
-    public void setMchexing(String s) {
-        this.mark = s;
+    public void setid(String s) {
+        this.time = s;
 
     }
 
     private void setData(data2 data) {
         data2 mdatabean2 = data;
+        tv_mark.setText(mdatabean2.getMark());
         tv_time.setText(addDateMinut(mdatabean2.getTime(), 8));
-        boolean b;
-        b = mdatabean2.getGPSerr().equals("0");
 
-        // tv_time.setText(mdatabean2.getGPSerr());
-        Log.e("1111", b + "");
-        // Log.e("1111",mdatabean2.getGPSerr());
-//        tv_weidu.setText(df.format((Double.valueOf(mdatabean2.getN())) / 100));
-//         tv_jingdu.setText(df.format((Double.valueOf(mdatabean2.getE())) / 100));
-//        tv_bohelun.setText(mdatabean2.getBohelun());
-//        tv_zuoye .setText(mdatabean2.getZuoye());
-//        tv_fukuan .setText(mdatabean2.getFukuan());
-//        tv_getai.setText(mdatabean2.getGetai());
-//        tv_shusongzhou .setText(mdatabean2.getShusongzhou());
-//        tv_cheshu .setText(mdatabean2.getChesu());
-//        tv_QieLTL .setText(mdatabean2.getQieLTL());
-//        tv_LiZSP .setText(mdatabean2.getLiZSP());
-//        tv_ZaYSP .setText(mdatabean2.getZaYSP());
-//        tv_GeCGD .setText(mdatabean2.getGeCGD());
-//        tv_QinXSS .setText(mdatabean2.getQinXSS());
-//        tv_JiaDSS.setText(mdatabean2.getJiaDSS());
-//        YuLSD .setText(mdatabean2.getYuLSD());
-//        HanZL .setText(mdatabean2.getHanZL());
-//        PoSL .setText(mdatabean2.getPoSL());
-//        LiZLL .setText(mdatabean2.getLiZLL());
-//        tv_ZongZTL .setText(mdatabean2.getZongZTL());
-//        tv_FengJZS .setText(mdatabean2.getFongJZS());
-//        tv_QuDL .setText(mdatabean2.getQuDL());
-//        tv_ZhengDS.setText(mdatabean2.getZhengDS());
 
         if (mdatabean2.getGPSerr().equals("0")) {
-            if (mdatabean2.getN().equals("")||mdatabean2.getE().equals("")) {
+            if (mdatabean2.getN().equals("") || mdatabean2.getE().equals("")) {
                 tv_weidu.setText("ERROR!");
 
                 tv_jingdu.setText("ERROR!");
                 tv_jingdu.setTextColor(Color.RED);
                 tv_weidu.setTextColor(Color.RED);
 
-            }
-             else {
+            } else {
                 tv_weidu.setText(df.format((Double.valueOf(mdatabean2.getN())) / 100));
                 tv_weidu.setTextColor(Color.BLACK);
                 tv_jingdu.setText(df.format((Double.valueOf(mdatabean2.getE())) / 100));
@@ -223,7 +185,7 @@ public class ResultFragment extends Fragment {
 
             }
         }
-         if (mdatabean2.getGPSerr().equals("1")) {
+        if (mdatabean2.getGPSerr().equals("1")) {
             tv_weidu.setText("ERROR!");
             tv_jingdu.setText("ERROR!");
             tv_weidu.setTextColor(Color.RED);
@@ -254,8 +216,8 @@ public class ResultFragment extends Fragment {
             tv_QuDL.setText(mdatabean2.getQuDL());
             tv_ZhengDS.setText(mdatabean2.getZhengDS());
         }
-//        //
-         if (mdatabean2.getCANerr().equals("1")) {
+
+        if (mdatabean2.getCANerr().equals("1")) {
             tv_bohelun.setText("NULL");
             tv_zuoye.setText("NULL");
             tv_fukuan.setText("NULL");
@@ -298,6 +260,5 @@ public class ResultFragment extends Fragment {
         return format.format(date);
 
     }
-
 
 }

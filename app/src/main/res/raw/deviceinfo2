@@ -1,0 +1,18 @@
+{
+     "productKey": "a1VOjEIP4g7",
+     "deviceName": "NJ_Mobile_1",
+     "productSecret": "",
+     "deviceSecret": "EI4bxXOZ1bEjGDBrJtQQo8hTXJx9ZhSb",
+
+     "subDevice": [
+       {
+           "productKey": "",
+           "deviceName": ""
+       },
+       {
+         "productKey": "",
+         "deviceName": ""
+     }
+   ]
+ }
+

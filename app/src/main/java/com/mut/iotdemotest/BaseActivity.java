@@ -67,6 +67,7 @@ public class BaseActivity extends AppCompatActivity {
         logStr = null;
     }
 
+
     public void log(final String tag, final String message){
         if (textView == null){
            // textView = findViewById(R.id.textview_console);
