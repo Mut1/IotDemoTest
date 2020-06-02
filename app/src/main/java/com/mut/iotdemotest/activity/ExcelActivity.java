@@ -99,7 +99,7 @@ public class ExcelActivity extends BaseActivity implements View.OnClickListener 
         if (mdatalist.size() == 0) {
             ToastUtilsCs.showToast_info(ExcelActivity.this,"数据库内无数据");
             //mStatusView.bind();
-           //TODO
+
         }
         else {
             int size = mdatalist.size();

@@ -136,7 +136,6 @@ public class IDActivity extends BaseActivity implements View.OnClickListener {
             return;
         }
 
-        // TODO validate success, do something
 
 
     }

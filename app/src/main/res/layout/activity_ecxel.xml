@@ -32,5 +32,12 @@ android:layout_gravity="center"
         android:layout_height="40dp"
         android:layout_margin="15dp"
         />
-
+    <com.qmuiteam.qmui.widget.QMUILoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        app:qmui_loading_view_size="25dp"
+      android:layout_gravity="center_horizontal"
+android:layout_marginTop="70dp"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

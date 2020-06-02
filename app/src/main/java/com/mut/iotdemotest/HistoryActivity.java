@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.mut.iotdemotest.entity.data2;
 import com.mut.iotdemotest.fragment.HistoryFragment;
+import com.mut.iotdemotest.utils.TimeUtilsCS;
 import com.orient.me.widget.placeholder.StatusView;
 
 import java.text.SimpleDateFormat;
@@ -54,7 +55,8 @@ public class HistoryActivity extends BaseActivity {
             if (size>tabsize)
             {
             for (int i = size - 1; i >= size-tabsize ; i--) {
-                titles.add(addDatehour(dataStorage.load(data2.class,String.valueOf(i)).getTime(),8));
+                String time = TimeUtilsCS.date2time(dataStorage.load(data2.class,String.valueOf(i)).getTime()) ;
+                titles.add(addDatehour(time,8));
               //  titles.add(addDatehour(mdatalist.get(i).getTime(), 8));
                 Log.e("title","title+"+i+"   "+addDatehour(dataStorage.load(data2.class,String.valueOf(i)).getTime(),8));
                 HistoryFragment fm = new HistoryFragment();
@@ -65,7 +67,8 @@ public class HistoryActivity extends BaseActivity {
         else
             {
                 for (int i = size - 1; i >= 0 ; i--) {
-                    titles.add(addDatehour(mdatalist.get(i).getTime(), 8));
+                    String time = TimeUtilsCS.date2time(dataStorage.load(data2.class,String.valueOf(i)).getTime()) ;
+                    titles.add(addDatehour(time,8));
                     Log.e("title","title+"+i+"   "+addDatehour(mdatalist.get(i).getTime(), 8));
                     HistoryFragment fm = new HistoryFragment();
                     fm.setid(mdatalist.get(i).getTime());

@@ -78,7 +78,7 @@ public class ExcelUtil {
      * @param  导出excel存放的地址（目录）
      * @param colName excel中包含的列名（可以有多个）
      */
-    public static void initExcel(String filePath, String sheetName, String[] colName) {
+    public static void  initExcel(String filePath, String sheetName, String[] colName) {
         format();
         WritableWorkbook workbook = null;
         try {
@@ -134,8 +134,9 @@ public class ExcelUtil {
                     List<String> list = new ArrayList<>();
                     list.add(addDateMinut(projectBean.getTime(),8));
                     list.add(projectBean.getMark());
+                    //顺序不对 正确顺序 POIEXCELACTIVIRTY
                     list.add(df.format((Double.valueOf(projectBean.getN())) / 100));
-                    list.add(df.format((Double.valueOf(projectBean.getN())) / 100));
+                    list.add(df.format((Double.valueOf(projectBean.getE())) / 100));
                     list.add(projectBean.getBohelun());
                     list.add(projectBean.getZuoye());
                     list.add(projectBean.getFukuan());

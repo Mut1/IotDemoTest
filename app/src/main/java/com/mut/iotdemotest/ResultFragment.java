@@ -104,7 +104,7 @@ public class ResultFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-// TODO
+           // TODO
 
         // message_total.setText((ResultActivity)getActivity().getchexing());
         messageContent = event.getJSON();

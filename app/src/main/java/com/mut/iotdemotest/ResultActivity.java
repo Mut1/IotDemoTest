@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.CollectionUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.mut.iotdemotest.entity.data2;
+import com.mut.iotdemotest.utils.TimeUtilsCS;
 import com.orient.me.widget.placeholder.StatusView;
 import com.qmuiteam.qmui.widget.QMUILoadingView;
 
@@ -87,12 +88,14 @@ private List<data2>  mData2List;
             Log.d(TAG,"收到下行消息 topic=" + s1);
             Gson gson= new Gson();
             data2   mdata= gson.fromJson(messageContent,data2.class);
+
             Log.d(TAG,"收到信息包" + mdata);
 
             IDataStorage dataStorage = DataStorageFactory.getInstance(getApplicationContext(), DataStorageFactory.TYPE_DATABASE);
             int i = dataStorage.loadAll(data2.class).size();
             Log.e("title","数据库长度:"+i);
             Log.e("title","时间:"+addDatehour(mdata.getTime(),8));
+            mdata.setTime(TimeUtilsCS.timeplusdate(mdata.getTime()));
             dataStorage.storeOrUpdate(mdata,String.valueOf(i));
             if (mdata!=null){
                if( titles.contains(mdata.getMark()))

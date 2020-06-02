@@ -13,8 +13,14 @@ import com.aliyun.alink.linkkit.api.LinkKit;
 import com.aliyun.alink.linksdk.tools.AError;
 import com.aliyun.alink.linksdk.tools.ALog;
 import com.google.gson.Gson;
-import com.mut.iotdemotest.activity.ExcelActivity;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnCancelListener;
+import com.lxj.xpopup.interfaces.OnConfirmListener;
+import com.lxj.xpopup.interfaces.SimpleCallback;
+import com.mut.iotdemotest.activity.POIExcelActivity;
 import com.mut.iotdemotest.entity.data2;
+import com.mut.iotdemotest.utils.TimeUtilsCS;
+import com.mut.iotdemotest.utils.ToastUtilsCs;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import java.io.BufferedReader;
@@ -46,17 +52,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public static String productKey = null, deviceName = null, deviceSecret = null, productSecret = null, password = null, username = null, clientId = null;
     public static Context mAppContext = null;
     private List<data2> mdatalist;
+    private QMUIRoundButton btn_add1;
+    private QMUIRoundButton btn_add2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
         mdatalist = new ArrayList<>();
         btn_nowdata = (QMUIRoundButton) findViewById(R.id.btn_nowdata);
         btn_historydata = (QMUIRoundButton) findViewById(R.id.btn_historydata);
         btn_refresh = (QMUIRoundButton) findViewById(R.id.btn_refresh);
-        btn_excel=findViewById(R.id.btn_excel);
+        btn_excel = findViewById(R.id.btn_excel);
         btn_excel.setOnClickListener(this);
         btn_nowdata.setOnClickListener(this);
         btn_historydata.setOnClickListener(this);
@@ -70,6 +79,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         getDeviceInfoFrom(testData);
         deinit();
         connect();
+
     }
 
 
@@ -150,21 +160,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_nowdata:
                 IDataStorage dataStorage = DataStorageFactory.getInstance(getBaseContext(), DataStorageFactory.TYPE_DATABASE);
                 mdatalist = dataStorage.loadAll(data2.class);
-                int size= mdatalist.size();
-                if (mdatalist.size() > 2000) {
-
-                        dataStorage.deleteAll(data2.class);
-
-                }
-                start_NowData();
+                if (mdatalist.size() >= 60000) {
+                    pop();
+                } else
+                    start_NowData();
                 break;
             case R.id.btn_historydata:
                 Intent intent = new Intent(this, HistoryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_excel:
-                Intent intent1 = new Intent(this, ExcelActivity.class);
+                //  Intent intent1 = new Intent(this, ExcelActivity.class);
+                Intent intent1 = new Intent(this, POIExcelActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.btn_add1:
+                adddata(1);
+                break;
+            case R.id.btn_add2:
+                adddata10000(70000);
                 break;
         }
 
@@ -288,6 +302,88 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // deinit();
+        // deinit();
+    }
+
+    private void pop() {
+        new XPopup.Builder(MainActivity.this)
+//                         .dismissOnTouchOutside(false)
+//                         .autoDismiss(false)
+//                        .popupAnimation(PopupAnimation.NoAnimation)
+                .setPopupCallback(new SimpleCallback() {
+                    @Override
+                    public void onCreated() {
+                        Log.e("tag", "弹窗创建了");
+                    }
+
+                    @Override
+                    public void onShow() {
+                        Log.e("tag", "onShow");
+                    }
+
+                    @Override
+                    public void onDismiss() {
+                        Log.e("tag", "onDismiss");
+                    }
+
+                    //如果你自己想拦截返回按键事件，则重写这个方法，返回true即可
+                    @Override
+                    public boolean onBackPressed() {
+                        // ToastUtils.showShort("我拦截的返回按键，按返回键XPopup不会关闭了");
+                        return true;
+                    }
+                }).asConfirm("数据过多！", "已保存数据超过60000条，请及时导出数据！以防数据丢失",
+                "稍后再说", "去导出",
+                new OnConfirmListener() {
+                    @Override
+                    public void onConfirm() {
+                        //  toast("click confirm");
+                        Intent i = new Intent(MainActivity.this, POIExcelActivity.class);
+                        startActivity(i);
+                    }
+                }, new OnCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        start_NowData();
+                    }
+                }, false)
+                .show();
+    }
+
+    private void adddata(int size) {
+        String messageContent = "{\"GPSerr\":\"0\",\"CANerr\":\"0\",\"Chesu\":\"72\",\"HanZL\":\"4\",\"E\":\"1920.658\",\"Getai\":\"86\",\"Mark\":\"A100101\",\"Time\":\"12:32:5\",\"N\":\"230.125\",\"Fukuan\":\"338\",\"QieLTL\":\"17\",\"LiZSP\":\"690\",\"ZongZTL\":\"680\",\"Shusongzhou\":\"192\",\"PoSL\":\"0\",\"QuDL\":\"14\",\"Zuoye\":\"0\",\"ZaYSP\":\"14\",\"QinXSS\":\"9\",\"ZhengDS\":\"332\",\"Bohelun\":\"27\",\"GeCGD\":\"44\",\"JiaDSS\":\"583\",\"FongJZS\":\"1495\",\"YuLSD\":\"9\",\"LiZLL\":\"3\"}";
+        Gson gson = new Gson();
+        data2 data = gson.fromJson(messageContent, data2.class);
+        IDataStorage dataStorage1 = DataStorageFactory.getInstance(getBaseContext(), DataStorageFactory.TYPE_DATABASE);
+        data.setTime(TimeUtilsCS.timeplusdate(data.getTime()));
+
+        for (int i = 0; i < size; i++) {
+            //999912
+            int j = dataStorage1.loadAll(data2.class).size();
+            dataStorage1.storeOrUpdate(data, String.valueOf(j));
+        }
+        ToastUtilsCs.showToast_info(MainActivity.this,dataStorage1.loadAll(data2.class).size()+"");
+
+    }
+
+    private void adddata10000(int size) {
+        String messageContent = "{\"GPSerr\":\"0\",\"CANerr\":\"0\",\"Chesu\":\"72\",\"HanZL\":\"4\",\"E\":\"1920.658\",\"Getai\":\"86\",\"Mark\":\"A100101\",\"Time\":\"12:32:5\",\"N\":\"230.125\",\"Fukuan\":\"338\",\"QieLTL\":\"17\",\"LiZSP\":\"690\",\"ZongZTL\":\"680\",\"Shusongzhou\":\"192\",\"PoSL\":\"0\",\"QuDL\":\"14\",\"Zuoye\":\"0\",\"ZaYSP\":\"14\",\"QinXSS\":\"9\",\"ZhengDS\":\"332\",\"Bohelun\":\"27\",\"GeCGD\":\"44\",\"JiaDSS\":\"583\",\"FongJZS\":\"1495\",\"YuLSD\":\"9\",\"LiZLL\":\"3\"}";
+        Gson gson = new Gson();
+        data2 data = gson.fromJson(messageContent, data2.class);
+        IDataStorage dataStorage1 = DataStorageFactory.getInstance(getBaseContext(), DataStorageFactory.TYPE_DATABASE);
+        data.setTime(TimeUtilsCS.timeplusdate(data.getTime()));
+        for (int i = 0; i < size; i++) {
+            //999912
+
+            dataStorage1.storeOrUpdate(data, String.valueOf(i));
+        }
+        ToastUtilsCs.showToast_info(MainActivity.this,dataStorage1.loadAll(data2.class).size()+"");
+    }
+    private void initView() {
+        btn_add1 = (QMUIRoundButton) findViewById(R.id.btn_add1);
+        btn_add2 = (QMUIRoundButton) findViewById(R.id.btn_add2);
+
+        btn_add1.setOnClickListener(this);
+        btn_add2.setOnClickListener(this);
     }
 }

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.mut.iotdemotest.MessageEvent;
 import com.mut.iotdemotest.R;
 import com.mut.iotdemotest.entity.data2;
+import com.mut.iotdemotest.utils.TimeUtilsCS;
 import com.qmuiteam.qmui.alpha.QMUIAlphaTextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -166,7 +167,8 @@ public data2 getdata() {
     private void setData(data2 data) {
         data2 mdatabean2 = data;
         tv_mark.setText(mdatabean2.getMark());
-        tv_time.setText(addDateMinut(mdatabean2.getTime(), 8));
+        String time = TimeUtilsCS.date2time(mdatabean2.getTime());
+        tv_time.setText(addDateMinut(time, 8));
 
 
         if (mdatabean2.getGPSerr().equals("0")) {
