@@ -119,7 +119,8 @@ public class POIExcelActivity extends BaseActivity implements View.OnClickListen
                 e.printStackTrace();
             }
             writeExcel(sheetName, sheetHeads, listContent, fos);
-
+     loading_view.stop();
+     loading_view.setVisibility(View.INVISIBLE);
             if (mdatalist.size() > 60000) {
                 pop_delete(listId);
             }
@@ -140,6 +141,8 @@ public class POIExcelActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.export_button:
+                loading_view.setVisibility(View.VISIBLE);
+                loading_view.start();
                 exportExcel();
                 break;
             case R.id.open_button:

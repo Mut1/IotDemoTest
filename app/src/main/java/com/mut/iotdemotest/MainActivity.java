@@ -174,12 +174,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent1 = new Intent(this, POIExcelActivity.class);
                 startActivity(intent1);
                 break;
-            case R.id.btn_add1:
-                adddata(1);
-                break;
-            case R.id.btn_add2:
-                adddata10000(70000);
-                break;
+//            case R.id.btn_add1:
+//                adddata(1);
+//                break;
+//            case R.id.btn_add2:
+//                adddata10000(70000);
+//                break;
         }
 
     }
@@ -380,10 +380,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ToastUtilsCs.showToast_info(MainActivity.this,dataStorage1.loadAll(data2.class).size()+"");
     }
     private void initView() {
-        btn_add1 = (QMUIRoundButton) findViewById(R.id.btn_add1);
-        btn_add2 = (QMUIRoundButton) findViewById(R.id.btn_add2);
-
-        btn_add1.setOnClickListener(this);
-        btn_add2.setOnClickListener(this);
+//        btn_add1 = (QMUIRoundButton) findViewById(R.id.btn_add1);
+//        btn_add2 = (QMUIRoundButton) findViewById(R.id.btn_add2);
+//        btn_add1.setOnClickListener(this);
+//        btn_add2.setOnClickListener(this);
     }
 }

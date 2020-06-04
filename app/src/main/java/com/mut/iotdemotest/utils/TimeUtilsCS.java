@@ -2,6 +2,7 @@ package com.mut.iotdemotest.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeUtilsCS {
@@ -40,6 +41,26 @@ public class TimeUtilsCS {
             e.printStackTrace();
         }
         return ds.format(date1);
+    }
+
+    //当前时间串yyyy-MM-dd HH:mm:ss+n个小时
+    public static String addDateHour(String time, int hour) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(time);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (date == null)
+            return "";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR, hour);// 24小时制
+        date = cal.getTime();
+        cal = null;
+        return format.format(date);
+
     }
 
 }

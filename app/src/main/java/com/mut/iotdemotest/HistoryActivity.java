@@ -58,7 +58,7 @@ public class HistoryActivity extends BaseActivity {
                 String time = TimeUtilsCS.date2time(dataStorage.load(data2.class,String.valueOf(i)).getTime()) ;
                 titles.add(addDatehour(time,8));
               //  titles.add(addDatehour(mdatalist.get(i).getTime(), 8));
-                Log.e("title","title+"+i+"   "+addDatehour(dataStorage.load(data2.class,String.valueOf(i)).getTime(),8));
+                Log.e("title","title+"+i+"   "+TimeUtilsCS.addDateHour(dataStorage.load(data2.class,String.valueOf(i)).getTime(),8));
                 HistoryFragment fm = new HistoryFragment();
                 fm.setid(dataStorage.load(data2.class,String.valueOf(i)).getTime());
                 mFragmentList.add(fm);
