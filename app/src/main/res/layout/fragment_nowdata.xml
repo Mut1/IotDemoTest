@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+
+android:background="@color/qmui_config_color_separator"
+android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/Mark"
+            android:textSize="20sp" />
+
+        <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:id="@+id/tv_mark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:text="加载中..."
+            android:textColor="@color/qmui_config_color_red"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/time"
+            android:textSize="20sp" />
+
+        <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+     <!--part0 -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/part0"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/N"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_weidu"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/E"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_jingdu"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/High"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_High"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/Speed"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_Speed"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/Path"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_Path"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/QJSD12"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_QJSD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+<!--  part1  -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/part1"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+<!--脱粒滚筒转速-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/TLGT17"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_TLGT"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--风机转速-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/FJZS18"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_FJZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!-- 输粮搅龙转速   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/SLJLZS19"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_SLJLZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  杂余搅龙转速  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/ZYJLZS20"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_ZYJLZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--脱粒间隙-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/TLJX27"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_TLJX"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <!--导流条角度-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/DLBKD28"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_DLBKD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+    <!--进风口开度-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/JFKKD29"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_JFKKD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <!--  鱼鳞筛开度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/YLKSD23"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_YLKSD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  籽粒流量  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/LZLL13"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_LZLL"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  清选损失  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/QXSS21"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_QXSS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  夹带损失  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/JDSS22"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_JDSS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  含杂率  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/HZL25"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_HZL"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  破碎率  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/PSL26"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_PSL"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+
+<!--   part 2  -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/part2"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+<!--  主割刀转速  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/ZGDZS14"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_ZGDZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--拨禾轮转速-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/BHLZS15"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_BHLZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  输送槽转速  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/SSCZS16"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_SSCZS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  割幅宽度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/GFKD24"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_GFKD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  割台高度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/GTGD05"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_GTGD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  拨禾轮高度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/BHLGD06"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_BHLGD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  下割刀高度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/XGD07"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_XGD"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+
+<!-- part3   -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/part3"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+<!--横向车身倾角-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/HXCS01"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_HXCS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+<!--    纵向车身倾角 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/ZXCS02"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_ZXCS"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  底盘左前液压缸位移  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/DPZQ08"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_DPZQ"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  底盘右前液压缸位移  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/DPYQ09"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_DPYQ"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!-- 底盘左后液压缸位移   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/DPZH10"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_DPZH"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  底盘右后液压缸位移  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/DPYH11"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_DPYH"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+<!--part4-->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/part4"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+<!--卸粮筒液压缸位移-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/XLGWY03"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_XLGWY"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+<!--  卸粮筒旋转角度  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/XLGZJ04"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_XLGZJ"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="加载中..."
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+</ScrollView>

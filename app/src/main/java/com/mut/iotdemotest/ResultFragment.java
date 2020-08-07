@@ -104,7 +104,7 @@ public class ResultFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-           // TODO
+        // TODO
 
         // message_total.setText((ResultActivity)getActivity().getchexing());
         messageContent = event.getJSON();
@@ -113,7 +113,7 @@ public class ResultFragment extends Fragment {
         data2 mdatabean2 = gson.fromJson(messageContent, data2.class);
         if (mdatabean2 != null) {
             if ((mdatabean2.getMark()).equals(mark)) {
-//  ALog.e(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        //  ALog.e(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 setData(mdatabean2);
             }
         }
@@ -180,42 +180,19 @@ public class ResultFragment extends Fragment {
         boolean b;
         b = mdatabean2.getGPSerr().equals("0");
 
-        // tv_time.setText(mdatabean2.getGPSerr());
+
         Log.e("1111", b + "");
-        // Log.e("1111",mdatabean2.getGPSerr());
-//        tv_weidu.setText(df.format((Double.valueOf(mdatabean2.getN())) / 100));
-//         tv_jingdu.setText(df.format((Double.valueOf(mdatabean2.getE())) / 100));
-//        tv_bohelun.setText(mdatabean2.getBohelun());
-//        tv_zuoye .setText(mdatabean2.getZuoye());
-//        tv_fukuan .setText(mdatabean2.getFukuan());
-//        tv_getai.setText(mdatabean2.getGetai());
-//        tv_shusongzhou .setText(mdatabean2.getShusongzhou());
-//        tv_cheshu .setText(mdatabean2.getChesu());
-//        tv_QieLTL .setText(mdatabean2.getQieLTL());
-//        tv_LiZSP .setText(mdatabean2.getLiZSP());
-//        tv_ZaYSP .setText(mdatabean2.getZaYSP());
-//        tv_GeCGD .setText(mdatabean2.getGeCGD());
-//        tv_QinXSS .setText(mdatabean2.getQinXSS());
-//        tv_JiaDSS.setText(mdatabean2.getJiaDSS());
-//        YuLSD .setText(mdatabean2.getYuLSD());
-//        HanZL .setText(mdatabean2.getHanZL());
-//        PoSL .setText(mdatabean2.getPoSL());
-//        LiZLL .setText(mdatabean2.getLiZLL());
-//        tv_ZongZTL .setText(mdatabean2.getZongZTL());
-//        tv_FengJZS .setText(mdatabean2.getFongJZS());
-//        tv_QuDL .setText(mdatabean2.getQuDL());
-//        tv_ZhengDS.setText(mdatabean2.getZhengDS());
+
 
         if (mdatabean2.getGPSerr().equals("0")) {
-            if (mdatabean2.getN().equals("")||mdatabean2.getE().equals("")) {
+            if (mdatabean2.getN().equals("") || mdatabean2.getE().equals("")) {
                 tv_weidu.setText("ERROR!");
 
                 tv_jingdu.setText("ERROR!");
                 tv_jingdu.setTextColor(Color.RED);
                 tv_weidu.setTextColor(Color.RED);
 
-            }
-             else {
+            } else {
                 tv_weidu.setText(df.format((Double.valueOf(mdatabean2.getN())) / 100));
                 tv_weidu.setTextColor(Color.BLACK);
                 tv_jingdu.setText(df.format((Double.valueOf(mdatabean2.getE())) / 100));
@@ -223,7 +200,7 @@ public class ResultFragment extends Fragment {
 
             }
         }
-         if (mdatabean2.getGPSerr().equals("1")) {
+        if (mdatabean2.getGPSerr().equals("1")) {
             tv_weidu.setText("ERROR!");
             tv_jingdu.setText("ERROR!");
             tv_weidu.setTextColor(Color.RED);
@@ -255,7 +232,7 @@ public class ResultFragment extends Fragment {
             tv_ZhengDS.setText(mdatabean2.getZhengDS());
         }
 //        //
-         if (mdatabean2.getCANerr().equals("1")) {
+        if (mdatabean2.getCANerr().equals("1")) {
             tv_bohelun.setText("NULL");
             tv_zuoye.setText("NULL");
             tv_fukuan.setText("NULL");

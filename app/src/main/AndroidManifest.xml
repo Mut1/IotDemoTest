@@ -31,6 +31,7 @@
         <activity android:name=".ResultActivity"/>
         <activity android:name=".activity.ExcelActivity"/>
         <activity android:name=".activity.POIExcelActivity"/>
+        <activity android:name=".activity.NowDataActivity"/>
         <activity android:name=".IDActivity">
 
             <intent-filter>

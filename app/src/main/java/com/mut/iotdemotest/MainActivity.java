@@ -17,6 +17,7 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.interfaces.OnCancelListener;
 import com.lxj.xpopup.interfaces.OnConfirmListener;
 import com.lxj.xpopup.interfaces.SimpleCallback;
+import com.mut.iotdemotest.activity.NowDataActivity;
 import com.mut.iotdemotest.activity.POIExcelActivity;
 import com.mut.iotdemotest.entity.data2;
 import com.mut.iotdemotest.utils.TimeUtilsCS;
@@ -99,7 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (!checkReady()) {
             return;
         }
-        Intent intent = new Intent(this, ResultActivity.class);
+        Intent intent = new Intent(this, NowDataActivity.class);
         startActivity(intent);
     }
 
