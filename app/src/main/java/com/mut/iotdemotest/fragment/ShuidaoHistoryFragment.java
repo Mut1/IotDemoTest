@@ -1,6 +1,5 @@
 package com.mut.iotdemotest.fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,25 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 
-import com.mut.iotdemotest.MessageEvent;
 import com.mut.iotdemotest.R;
 import com.mut.iotdemotest.entity.ShuidaoBean;
 import com.mut.iotdemotest.utils.TimeUtilsCS;
 import com.qmuiteam.qmui.alpha.QMUIAlphaTextView;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.text.DecimalFormat;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import xiaofei.library.datastorage.DataStorageFactory;
+import xiaofei.library.datastorage.IDataStorage;
+import xiaofei.library.datastorage.util.Condition;
 
-public class NowDataFragment extends Fragment {
+public class ShuidaoHistoryFragment extends Fragment {
     private String messageContent;
     private String mark;
     private QMUIAlphaTextView tv_mark;
@@ -67,6 +64,7 @@ public class NowDataFragment extends Fragment {
     private TextView tv_JFKKD;
 
     private DecimalFormat df;
+    private String time;
 
     @Nullable
     @Override
@@ -74,93 +72,42 @@ public class NowDataFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_nowdata, container, false);
 
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initview();
-
-        tv_mark.setText(mark);
-    }
-
-
-    public void setMark(String s) {
-        this.mark = s;
-    }
-
-    private void initview() {
-        df = new DecimalFormat("#.0000000");
-
-        tv_mark = (QMUIAlphaTextView) getView().findViewById(R.id.tv_mark);
-        tv_time = (QMUIAlphaTextView) getView().findViewById(R.id.tv_time);
-        tv_weidu = (TextView) getView().findViewById(R.id.tv_weidu);
-        tv_jingdu = (TextView) getView().findViewById(R.id.tv_jingdu);
-        tv_HXCS = (TextView) getView().findViewById(R.id.tv_HXCS);
-        tv_ZXCS = (TextView) getView().findViewById(R.id.tv_ZXCS);
-        tv_XLGWY = (TextView) getView().findViewById(R.id.tv_XLGWY);
-        tv_XLGZJ = (TextView) getView().findViewById(R.id.tv_XLGZJ);
-        tv_GTGD = (TextView) getView().findViewById(R.id.tv_GTGD);
-        tv_BHLGD = (TextView) getView().findViewById(R.id.tv_BHLGD);
-        tv_XGD = (TextView) getView().findViewById(R.id.tv_XGD);
-        tv_DPZQ = (TextView) getView().findViewById(R.id.tv_DPZQ);
-        tv_DPYQ = (TextView) getView().findViewById(R.id.tv_DPYQ);
-        tv_DPZH = (TextView) getView().findViewById(R.id.tv_DPZH);
-        tv_DPYH = (TextView) getView().findViewById(R.id.tv_DPYH);
-        tv_QJSD = (TextView) getView().findViewById(R.id.tv_QJSD);
-        tv_LZLL = (TextView) getView().findViewById(R.id.tv_LZLL);
-        tv_ZGDZS = (TextView) getView().findViewById(R.id.tv_ZGDZS);
-        tv_BHLZS = (TextView) getView().findViewById(R.id.tv_BHLZS);
-        tv_SSCZS = (TextView) getView().findViewById(R.id.tv_SSCZS);
-        tv_TLGT = (TextView) getView().findViewById(R.id.tv_TLGT);
-        tv_FJZS = (TextView) getView().findViewById(R.id.tv_FJZS);
-        tv_SLJLZS = (TextView) getView().findViewById(R.id.tv_SLJLZS);
-        tv_ZYJLZS = (TextView) getView().findViewById(R.id.tv_ZYJLZS);
-        tv_QXSS = (TextView) getView().findViewById(R.id.tv_QXSS);
-        tv_JDSS = (TextView) getView().findViewById(R.id.tv_JDSS);
-        tv_YLKSD = (TextView) getView().findViewById(R.id.tv_YLKSD);
-        tv_GFKD = (TextView) getView().findViewById(R.id.tv_GFKD);
-        tv_HZL = (TextView) getView().findViewById(R.id.tv_HZL);
-        tv_PSL = (TextView) getView().findViewById(R.id.tv_PSL);
-        tv_High = (TextView) getView().findViewById(R.id.tv_High);
-        tv_Speed = (TextView) getView().findViewById(R.id.tv_Speed);
-        tv_Path = (TextView) getView().findViewById(R.id.tv_Path);
-
-        tv_TLJX = (TextView) getView().findViewById(R.id.tv_TLJX);
-        tv_DLBKD = (TextView) getView().findViewById(R.id.tv_DLBKD);
-        tv_JFKKD = (TextView) getView().findViewById(R.id.tv_JFKKD);
-
-
+        setData(getdata());
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-
-
-        messageContent = event.getJSON();
-        Gson gson = new Gson();
-        ShuidaoBean mDatabean = gson.fromJson(messageContent, ShuidaoBean.class);
-        if (mDatabean != null) {
-            if ((mDatabean.getMark().equals(mark))) {
-                //  ALog.e(TAG, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                setData(mDatabean);
+    public ShuidaoBean getdata() {
+        IDataStorage dataStorage = DataStorageFactory.getInstance(getActivity(), DataStorageFactory.TYPE_DATABASE);
+        List<ShuidaoBean> list = dataStorage.load(ShuidaoBean.class, new Condition<ShuidaoBean>() {
+            @Override
+            public boolean satisfy(ShuidaoBean o) {
+                return o.getTime()==time;
             }
-        }
-
+        });
+        return list.get(list.size()-1);
     }
 
+    public void setTime(String s) {
+        this.time = s;
+
+    }
     private void setData(ShuidaoBean mDatabean) {
         ShuidaoBean mData = mDatabean;
-        tv_time.setText(TimeUtilsCS.addTimeHour(mData.getTime(), 8));
-
+        tv_mark.setText(mData.getMark());
+        String time = TimeUtilsCS.date2time(mData.getTime());
+        tv_time.setText(TimeUtilsCS.addTimeHour(time, 8));
 
         if (mData.getGPSerr().equals("0")) {
             if (mData.getN().equals("") || mData.getE().equals("")) {
                 tv_weidu.setText("NULL");
+
                 tv_jingdu.setText("NULL");
                 tv_jingdu.setTextColor(Color.BLACK);
                 tv_weidu.setTextColor(Color.BLACK);
-
                 tv_High.setText(mData.getHigh());
                 tv_High.setTextColor(Color.BLACK);
                 tv_Speed.setText(mData.getSpeed());
@@ -283,50 +230,50 @@ public class NowDataFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    private void initview() {
+        df = new DecimalFormat("#.0000000");
+
+        tv_mark = (QMUIAlphaTextView) getView().findViewById(R.id.tv_mark);
+        tv_time = (QMUIAlphaTextView) getView().findViewById(R.id.tv_time);
+        tv_weidu = (TextView) getView().findViewById(R.id.tv_weidu);
+        tv_jingdu = (TextView) getView().findViewById(R.id.tv_jingdu);
+        tv_HXCS = (TextView) getView().findViewById(R.id.tv_HXCS);
+        tv_ZXCS = (TextView) getView().findViewById(R.id.tv_ZXCS);
+        tv_XLGWY = (TextView) getView().findViewById(R.id.tv_XLGWY);
+        tv_XLGZJ = (TextView) getView().findViewById(R.id.tv_XLGZJ);
+        tv_GTGD = (TextView) getView().findViewById(R.id.tv_GTGD);
+        tv_BHLGD = (TextView) getView().findViewById(R.id.tv_BHLGD);
+        tv_XGD = (TextView) getView().findViewById(R.id.tv_XGD);
+        tv_DPZQ = (TextView) getView().findViewById(R.id.tv_DPZQ);
+        tv_DPYQ = (TextView) getView().findViewById(R.id.tv_DPYQ);
+        tv_DPZH = (TextView) getView().findViewById(R.id.tv_DPZH);
+        tv_DPYH = (TextView) getView().findViewById(R.id.tv_DPYH);
+        tv_QJSD = (TextView) getView().findViewById(R.id.tv_QJSD);
+        tv_LZLL = (TextView) getView().findViewById(R.id.tv_LZLL);
+        tv_ZGDZS = (TextView) getView().findViewById(R.id.tv_ZGDZS);
+        tv_BHLZS = (TextView) getView().findViewById(R.id.tv_BHLZS);
+        tv_SSCZS = (TextView) getView().findViewById(R.id.tv_SSCZS);
+        tv_TLGT = (TextView) getView().findViewById(R.id.tv_TLGT);
+        tv_FJZS = (TextView) getView().findViewById(R.id.tv_FJZS);
+        tv_SLJLZS = (TextView) getView().findViewById(R.id.tv_SLJLZS);
+        tv_ZYJLZS = (TextView) getView().findViewById(R.id.tv_ZYJLZS);
+        tv_QXSS = (TextView) getView().findViewById(R.id.tv_QXSS);
+        tv_JDSS = (TextView) getView().findViewById(R.id.tv_JDSS);
+        tv_YLKSD = (TextView) getView().findViewById(R.id.tv_YLKSD);
+        tv_GFKD = (TextView) getView().findViewById(R.id.tv_GFKD);
+        tv_HZL = (TextView) getView().findViewById(R.id.tv_HZL);
+        tv_PSL = (TextView) getView().findViewById(R.id.tv_PSL);
+        tv_High = (TextView) getView().findViewById(R.id.tv_High);
+        tv_Speed = (TextView) getView().findViewById(R.id.tv_Speed);
+        tv_Path = (TextView) getView().findViewById(R.id.tv_Path);
+
+        tv_TLJX = (TextView) getView().findViewById(R.id.tv_TLJX);
+        tv_DLBKD = (TextView) getView().findViewById(R.id.tv_DLBKD);
+        tv_JFKKD = (TextView) getView().findViewById(R.id.tv_JFKKD);
+
+
 
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-//        messageContent="{\"Chesu\":\"72\",\"HanZL\":\"4\",\"E\":\"1920.658\",\"Getai\":\"86\",\"Mark\":\"A100101\",\"Time\":\"12:32:5\",\"N\":\"230.125\",\"Fukuan\":\"338\",\"QieLTL\":\"17\",\"LiZSP\":\"690\",\"ZongZTL\":\"680\",\"Shusongzhou\":\"192\",\"PoSL\":\"0\",\"QuDL\":\"14\",\"Zuoye\":\"0\",\"ZaYSP\":\"14\",\"QinXSS\":\"9\",\"ZhengDS\":\"332\",\"Bohelun\":\"27\",\"GeCGD\":\"44\",\"JiaDSS\":\"583\",\"FongJZS\":\"1495\",\"YuLSD\":\"9\",\"LiZLL\":\"3\"}";
-//        Gson gson = new Gson();
-//        data2 mdatabean2= gson.fromJson(messageContent,data2.class);
-//        if (mdatabean2 != null) {
-//
-//            setData(mdatabean2);
-//
-//        }
-        EventBus.getDefault().register(this);
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        EventBus.getDefault().unregister(this);
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-
-    }
 }

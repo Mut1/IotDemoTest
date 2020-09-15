@@ -2,4 +2,51 @@
     <string name="app_name">明杰科技</string>
     <string name="error">无数据!</string>
     <string name="history_error">暂时无历史数据~</string>
+
+
+
+    <string name="part0">车辆状态</string>
+    <string name="part1">脱粒清选</string>
+    <string name="part2">割台</string>
+    <string name="part3">底盘</string>
+    <string name="part4">粮箱</string>
+
+    <string name="Mark">车辆编号：</string>
+    <string name="E">经度：</string>
+    <string name="N">纬度：</string>
+    <string name="High">海拔高度：</string>
+    <string name="Speed">地面速度：</string>
+    <string name="Path">航向角（北）：</string>
+    <string name="time">时间：</string>
+    <string name="HXCS01">横向车身倾角：</string>
+    <string name="ZXCS02">纵向车身倾角：</string>
+    <string name="XLGWY03">卸粮筒液压缸位移：</string>
+    <string name="XLGZJ04">卸粮筒旋转角度：</string>
+    <string name="GTGD05">割台高度：</string>
+    <string name="BHLGD06">拨禾轮高度：</string>
+    <string name="XGD07">下割刀高度：</string>
+    <string name="DPZQ08">底盘左前液压缸位移：</string>
+    <string name="DPYQ09">底盘右前液压缸位移：</string>
+    <string name="DPZH10">底盘左后液压缸位移：</string>
+    <string name="DPYH11">底盘右后液压缸位移：</string>
+    <string name="QJSD12">前进速度：</string>
+    <string name="LZLL13">籽粒流量：</string>
+    <string name="ZGDZS14">主割刀转速：</string>
+    <string name="BHLZS15">拨禾轮转速：</string>
+    <string name="SSCZS16">输送槽转速：</string>
+    <string name="TLGT17">脱粒滚筒转速：</string>
+    <string name="FJZS18">风机转速：</string>
+    <string name="SLJLZS19">输粮搅龙转速：</string>
+    <string name="ZYJLZS20">杂余搅龙转速：</string>
+    <string name="QXSS21">清选损失：</string>
+    <string name="JDSS22">夹带损失：</string>
+    <string name="YLKSD23">鱼鳞筛开度：</string>
+    <string name="GFKD24">割幅宽度：</string>
+    <string name="HZL25">含杂率：</string>
+    <string name="PSL26">破碎率：</string>
+
+
+    <string name="TLJX27">脱粒间隙：</string>
+    <string name="DLBKD28">导流条角度：</string>
+    <string name="JFKKD29">进风口开度：</string>
 </resources>

@@ -19,6 +19,8 @@ import com.lxj.xpopup.interfaces.OnConfirmListener;
 import com.lxj.xpopup.interfaces.SimpleCallback;
 import com.mut.iotdemotest.activity.NowDataActivity;
 import com.mut.iotdemotest.activity.POIExcelActivity;
+import com.mut.iotdemotest.activity.ShuidaoHistoryActivity;
+import com.mut.iotdemotest.entity.ShuidaoBean;
 import com.mut.iotdemotest.entity.data2;
 import com.mut.iotdemotest.utils.TimeUtilsCS;
 import com.mut.iotdemotest.utils.ToastUtilsCs;
@@ -55,6 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private List<data2> mdatalist;
     private QMUIRoundButton btn_add1;
     private QMUIRoundButton btn_add2;
+    private List<ShuidaoBean> mdatalistShuidao;
 
 
     @Override
@@ -80,6 +83,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         getDeviceInfoFrom(testData);
         deinit();
         connect();
+
+
+
+        Log.e("1111", TimeUtilsCS.isNumeric("11930.58333")+"");
+        Log.e("1111", TimeUtilsCS.isDouble("11930.58333")+"");
+        Log.e("1111", TimeUtilsCS.isDouble("11930.5707638824.8938")+"");
+     //   Log.e("1111", TimeUtilsCS.isNumType("11930.5707638824.8938")+"");
 
     }
 
@@ -160,20 +170,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_nowdata:
                 IDataStorage dataStorage = DataStorageFactory.getInstance(getBaseContext(), DataStorageFactory.TYPE_DATABASE);
-                mdatalist = dataStorage.loadAll(data2.class);
+                mdatalistShuidao = dataStorage.loadAll(ShuidaoBean.class);
                 if (mdatalist.size() >= 60000) {
-                    pop();
+                    pop_shuidao();
                 } else
                     start_NowData();
                 break;
             case R.id.btn_historydata:
-                Intent intent = new Intent(this, HistoryActivity.class);
+                Intent intent = new Intent(this, ShuidaoHistoryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_excel:
                 //  Intent intent1 = new Intent(this, ExcelActivity.class);
-                Intent intent1 = new Intent(this, POIExcelActivity.class);
-                startActivity(intent1);
+              //  Intent intent1 = new Intent(this, POIExcelActivity.class);
+              //  startActivity(intent1);
+                ToastUtilsCs.showToast_info(MainActivity.this,"未开放！");
                 break;
 //            case R.id.btn_add1:
 //                adddata(1);
@@ -350,6 +361,52 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }, false)
                 .show();
     }
+
+    private void pop_shuidao() {
+        new XPopup.Builder(MainActivity.this)
+//                         .dismissOnTouchOutside(false)
+//                         .autoDismiss(false)
+//                        .popupAnimation(PopupAnimation.NoAnimation)
+                .setPopupCallback(new SimpleCallback() {
+                    @Override
+                    public void onCreated() {
+                        Log.e("tag", "弹窗创建了");
+                    }
+
+                    @Override
+                    public void onShow() {
+                        Log.e("tag", "onShow");
+                    }
+
+                    @Override
+                    public void onDismiss() {
+                        Log.e("tag", "onDismiss");
+                    }
+
+                    //如果你自己想拦截返回按键事件，则重写这个方法，返回true即可
+                    @Override
+                    public boolean onBackPressed() {
+                        // ToastUtils.showShort("我拦截的返回按键，按返回键XPopup不会关闭了");
+                        return true;
+                    }
+                }).asConfirm("数据过多！", "已保存数据超过60000条,是否删除旧数据",
+                "删除", "下次再删",
+                new OnConfirmListener() {
+                    @Override
+                    public void onConfirm() {
+                        //  toast("click confirm");
+                        IDataStorage dataStorage = DataStorageFactory.getInstance(getBaseContext(), DataStorageFactory.TYPE_DATABASE);
+                        dataStorage.deleteAll(ShuidaoBean.class);
+                    }
+                }, new OnCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        start_NowData();
+                    }
+                }, false)
+                .show();
+    }
+
 
     private void adddata(int size) {
         String messageContent = "{\"GPSerr\":\"0\",\"CANerr\":\"0\",\"Chesu\":\"72\",\"HanZL\":\"4\",\"E\":\"1920.658\",\"Getai\":\"86\",\"Mark\":\"A100101\",\"Time\":\"12:32:5\",\"N\":\"230.125\",\"Fukuan\":\"338\",\"QieLTL\":\"17\",\"LiZSP\":\"690\",\"ZongZTL\":\"680\",\"Shusongzhou\":\"192\",\"PoSL\":\"0\",\"QuDL\":\"14\",\"Zuoye\":\"0\",\"ZaYSP\":\"14\",\"QinXSS\":\"9\",\"ZhengDS\":\"332\",\"Bohelun\":\"27\",\"GeCGD\":\"44\",\"JiaDSS\":\"583\",\"FongJZS\":\"1495\",\"YuLSD\":\"9\",\"LiZLL\":\"3\"}";
